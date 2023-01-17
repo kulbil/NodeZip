@@ -11,9 +11,11 @@ function stringRead(str) {
   for (var j = 0; j < stringArray.length; j++) {
     if(stringArray[j] == " " || j == stringArray.length - 1) {
       newString += (k - 1) + stringArray[j - 1] + stringArray[j];
-      k = 0; 
+      k = 0;
+      console.log(newString); 
     }
     k++
+    
   }
   return newString;
 }
