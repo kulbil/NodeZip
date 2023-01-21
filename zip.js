@@ -1,19 +1,16 @@
 var fs = require("fs");
 
 function stringRead(str) {
-  var stringArray = [];
   var newString = "";
-  var k;
+  var k = 1;
   for (var i = 0; i < str.length; i++) {
-    stringArray.push(str.charAt(i));
-  }
-
-  for (var j = 0; j < stringArray.length; j++) {
-    if(stringArray[j] == " " || j == stringArray.length - 1) {
-      newString += (k - 1) + stringArray[j - 1] + stringArray[j];
-      k = 0; 
+    if (str.charAt(i) == str.charAt(i - 1)) {
+      k++
+      if (str.charAt(i + 1) == " " || str.charAt(i + 1) == "") {
+        newString += k + str.charAt(i) + " ";
+        k = 1;
+      }
     }
-    k++
   }
   return newString;
 }
@@ -26,10 +23,9 @@ fs.readFile('LongDoc.txt', 'utf8', (err, data) => {
   console.log(data);
   console.log(stringRead(data));
 
-  /*
-  fs.writeFile('mynewfile1.txt', data, function (err) {
+  
+  fs.writeFile('mynewfile1.txt', stringRead(data), function (err) {
     if (err) throw err;
     console.log('Saved!');
   }); 
-  */
 });
